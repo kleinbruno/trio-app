@@ -13,6 +13,7 @@ yarn-error.log*
 
 # Xcode local env
 ios/.xcode.env.local
+*.xcuserstate
 
 # React Native
 android/.gradle/
