@@ -5,7 +5,7 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import { RootStackParamList } from '@app/navigation';
-import { NavBarHeader, BikeSummaryCard, DateRangePicker } from '@app/components';
+import { NavBarHeader, BikeSummaryCard, DateRangePicker, BookingSummary } from '@app/components';
 
 import styles from './styles';
 
@@ -39,6 +39,7 @@ const Booking = () => {
           onChangeStartDate={setStartDate}
           onChangeEndDate={setEndDate}
         />
+        <BookingSummary subtotal={165.0} serviceFee={24.75} />
       </View>
     </SafeAreaView>
   );

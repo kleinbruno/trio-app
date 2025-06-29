@@ -23,10 +23,11 @@ const styles = StyleSheet.create({
   },
   selectButton: {
     backgroundColor: '#FFD775',
-    paddingVertical: 16,
+    paddingVertical: 22,
     borderRadius: 16,
     marginTop: 50,
-    marginVertical: 25,
+    marginBottom: 25,
+    marginHorizontal: 16,
     alignItems: 'center',
   },
   selectButtonText: {
