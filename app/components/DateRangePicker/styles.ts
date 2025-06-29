@@ -1,27 +1,37 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  openButton: {
-    backgroundColor: '#1F49D1',
-    padding: 16,
-    borderRadius: 10,
+  dateInputContainer: {
+    borderWidth: 1,
+    borderColor: '#EDEDED',
+    borderRadius: 30,
+    padding: 14,
+    flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 24,
-    marginBottom: 16,
+    gap: 10,
   },
-  buttonText: {
-    color: '#fff',
-    fontWeight: '600',
+  dateInputText: {
+    color: '#1B1B1B',
     fontSize: 16,
     fontFamily: 'Mont',
   },
   modalContent: {
-    padding: 24,
+    flex: 1,
+    backgroundColor: '#1F49D1',
+    paddingBottom: 40,
+    justifyContent: 'flex-end',
   },
-  title: {
-    fontSize: 18,
+  selectButton: {
+    backgroundColor: '#FFD775',
+    paddingVertical: 16,
+    borderRadius: 16,
+    marginTop: 50,
+    marginVertical: 25,
+    alignItems: 'center',
+  },
+  selectButtonText: {
+    fontSize: 16,
     fontWeight: '700',
-    marginBottom: 12,
     color: '#1B1B1B',
     fontFamily: 'Mont',
   },

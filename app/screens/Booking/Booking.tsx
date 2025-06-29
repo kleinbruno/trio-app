@@ -19,7 +19,6 @@ const Booking = () => {
 
   const [startDate, setStartDate] = useState<string>();
   const [endDate, setEndDate] = useState<string>();
-  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <SafeAreaView edges={['bottom']} style={styles.container}>
@@ -29,16 +28,16 @@ const Booking = () => {
         onBackButtonPress={() => navigation.goBack()}
         headerHeight={70}
       />
-
-      <View style={{ paddingHorizontal: 24, marginTop: 24 }}>
+      <View style={styles.contentWrapper}>
         <BikeSummaryCard data={bike} />
-        <Text style={{ marginTop: 32, marginBottom: 10, fontSize: 25, fontWeight: '700'}}>
+        <Text style={styles.sectionTitle}>
           Select date and time
         </Text>
         <DateRangePicker
-          onSelect={(start, end) => {
-            console.log('Selecionado:', start, end);
-          }}
+          startDate={startDate}
+          endDate={endDate}
+          onChangeStartDate={setStartDate}
+          onChangeEndDate={setEndDate}
         />
       </View>
     </SafeAreaView>
