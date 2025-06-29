@@ -85,7 +85,9 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
     <>
       <Pressable style={styles.dateInputContainer} onPress={handleOpen}>
         <Text style={styles.dateInputText}>
-          From {startDate} to {endDate}
+          {startDate && endDate
+            ? `From ${format(parseISO(startDate), 'MMM/dd')} to ${format(parseISO(endDate), 'MMM/dd')}`
+            : 'Select a date'}
         </Text>
       </Pressable>
 

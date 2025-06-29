@@ -21,6 +21,23 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: '700',
   },
+  footer: {
+    position: 'absolute',
+    bottom: 16,
+    left: 16,
+    right: 16,
+  },
+  button: {
+    backgroundColor: '#1F49D1',
+    paddingVertical: 16,
+    borderRadius: 100,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
 });
 
 export default styles;
