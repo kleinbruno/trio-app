@@ -37,6 +37,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 14,
   },
+  loadingWrapper: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  errorText: {
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 12,
+    fontSize: 14,
+  }
 });
 
 export default styles;
