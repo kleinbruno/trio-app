@@ -8,5 +8,6 @@ export { default as NavBarRightItem } from './NavBarRightItem';
 export { default as BikeSummaryCard } from './BikeSummaryCard';
 export { default as DateRangePicker } from './DateRangePicker';
 export { default as BookingSummary } from './BookingSummary';
+export { default as AppModal } from './AppModal';
 
 

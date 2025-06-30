@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, ScrollView, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import useRentAmount from '@app/services/hooks/useRentAmount';
+
 import { RootStackParamList } from '@app/navigation';
-import { NavBarHeader, BikeSummaryCard, DateRangePicker, BookingSummary } from '@app/components';
+import { NavBarHeader, BikeSummaryCard } from '@app/components';
+import useRentAmount from '@app/services/hooks/useRentAmount';
+import useRentBike from '@app/services/hooks/useRentBike';
+import { ENV } from '../../../env';
 
 import styles from './styles';
-import { ENV } from '../../../env';
+import DatePickerSection from './sections/DatePickerSection';
+import BookingSummarySection from './sections/BookingSummarySection';
+import BookingSuccessModal from './sections/SuccessModalSection';
 
 type BookingScreenRouteProp = RouteProp<RootStackParamList, 'Booking'>;
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Booking'>;
@@ -20,6 +25,7 @@ const Booking = () => {
 
   const [startDate, setStartDate] = useState<string>();
   const [endDate, setEndDate] = useState<string>();
+  const [successModalVisible, setSuccessModalVisible] = useState(false);
 
   const { data: rentDetails, isLoading, error } = useRentAmount({
     bikeId: bike.id,
@@ -29,6 +35,27 @@ const Booking = () => {
   }, {
     enabled: !!startDate && !!endDate,
   });
+
+  const rentBikeMutation = useRentBike();
+
+  const handleBooking = () => {
+    if (!startDate || !endDate) return;
+
+    rentBikeMutation.mutate(
+      {
+        bikeId: bike.id,
+        userId: Number(ENV.USER_ID),
+        dateFrom: startDate,
+        dateTo: endDate,
+      },
+      {
+        onSuccess: () => setSuccessModalVisible(true),
+        onError: (error) => {
+          console.error('Rent error:', error);
+        },
+      }
+    );
+  };
 
   return (
     <SafeAreaView edges={['bottom']} style={styles.container}>
@@ -41,35 +68,31 @@ const Booking = () => {
         />
         <ScrollView style={styles.contentWrapper}>
           <BikeSummaryCard data={bike} />
-          <Text style={styles.sectionTitle}>
-            Select date and time
-          </Text>
-          <DateRangePicker onConfirmRange={({ startDate, endDate }) => {
-            setStartDate(startDate);
-            setEndDate(endDate);
-          }} />
-          {isLoading && (
-            <View style={styles.loadingWrapper}>
-              <ActivityIndicator size="large" color="#1F49D1" />
-            </View>
-          )}
-          {error && <Text style={styles.errorText}>Failed to load price. Please try again.</Text>}
-          {rentDetails && !isLoading && !error && (
-            <BookingSummary
-              subtotal={rentDetails.rentAmount}
-              serviceFee={rentDetails.fee}
-            />
-          )}
+          <DatePickerSection
+            onSelectRange={({ startDate, endDate }) => {
+              setStartDate(startDate);
+              setEndDate(endDate);
+            }}
+          />
+          <BookingSummarySection
+            isLoading={isLoading}
+            error={error}
+            rentDetails={rentDetails}
+          />
         </ScrollView>
         <View style={styles.footer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => console.log('Add to booking')}
+            onPress={handleBooking}
             disabled={!rentDetails}
           >
             <Text style={styles.buttonText}>Add to booking</Text>
           </TouchableOpacity>
         </View>
+        <BookingSuccessModal visible={successModalVisible} bike={bike} onClose={() => {
+          setSuccessModalVisible(false);
+          navigation.navigate('Bike Rental');
+        }} />
       </View>
     </SafeAreaView>
   );

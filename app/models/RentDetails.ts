@@ -1,4 +1,4 @@
-export interface RentAmount {
+export interface RentDetails {
   rentAmount: number;
   fee: number;
   totalAmount: number;

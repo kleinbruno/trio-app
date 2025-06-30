@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+container: {
     flex: 1,
     backgroundColor: 'white',
   },
@@ -44,9 +44,53 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     textAlign: 'center',
-    marginTop: 12,
+    marginTop: 16,
     fontSize: 14,
-  }
+  },
+  successOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.25)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+  },
+  successContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    padding: 24,
+    width: '100%',
+    alignItems: 'center',
+  },
+  successTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  successSubtitle: {
+    fontSize: 16,
+    color: '#555',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  successBikeWrapper: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  successButton: {
+    backgroundColor: '#1F49D1',
+    borderRadius: 10,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    width: '100%',
+    alignItems: 'center',
+  },
+  successButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });
 
 export default styles;

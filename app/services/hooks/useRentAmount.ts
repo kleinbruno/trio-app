@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 import { api } from '../client';
-import { RentAmount } from '@app/models/RentAmount';
+import { RentDetails } from '@app/models/RentDetails';
 
 interface RentAmountInput {
   bikeId: number;
@@ -9,13 +9,14 @@ interface RentAmountInput {
   dateTo: string;
 }
 
-const fetchRentAmount = async (params: RentAmountInput): Promise<RentAmount> => {
-  const { data } = await api.post<RentAmount>('/bikes/amount', params);
+const fetchRentAmount = async (params: RentAmountInput): Promise<RentDetails> => {
+  console.log('params', params)
+  const { data } = await api.post<RentDetails>('/bikes/amount', params);
   return data;
 };
 
 const useRentAmount = (params: RentAmountInput, options?: { enabled?: boolean }) =>
-  useQuery<RentAmount>(['rent-amount', params], () => fetchRentAmount(params), {
+  useQuery<RentDetails>(['rent-amount', params], () => fetchRentAmount(params), {
     enabled: options?.enabled,
   });
 
