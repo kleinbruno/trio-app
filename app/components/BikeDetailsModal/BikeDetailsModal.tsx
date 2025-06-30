@@ -45,7 +45,6 @@ const BikeDetailsModal: FC<BikeDetailsModalProps> = ({
           ratings={data?.ratings}
         />
       </View>
-
       <ScrollView
         testID="bike-details-modal-scrollview"
         style={styles.scrollView}
@@ -65,7 +64,6 @@ const BikeDetailsModal: FC<BikeDetailsModalProps> = ({
           </View>
         </View>
       </ScrollView>
-
       <View testID="bike-details-modal-footer" style={styles.footerContainer}>
         <TouchableOpacity style={styles.favoriteButton}>
           <Image source={FavoriteBigIcon} />

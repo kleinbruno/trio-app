@@ -14,7 +14,6 @@ const BookingSummary: React.FC<BookingSummaryProps> = ({ subtotal, serviceFee })
     <View style={styles.container}>
       <Text style={styles.title}>Booking Overview</Text>
       <View style={styles.separator} />
-
       <View style={styles.row}>
         <Text style={styles.label}>Subtotal</Text>
         <Text style={styles.value}>{subtotal.toFixed(2)} €</Text>
@@ -23,7 +22,6 @@ const BookingSummary: React.FC<BookingSummaryProps> = ({ subtotal, serviceFee })
         <Text style={styles.label}>Service Fee</Text>
         <Text style={styles.value}>{serviceFee.toFixed(2)} €</Text>
       </View>
-
       <View style={styles.row}>
         <Text style={styles.totalLabel}>Total</Text>
         <Text style={styles.totalValue}>{total.toFixed(2)} €</Text>

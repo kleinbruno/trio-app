@@ -1,5 +1,5 @@
 import React, { FC, useState, useMemo, useRef } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { eachDayOfInterval, format, parseISO } from 'date-fns';
 import { BottomSheetModal as GorhomBottomSheetModal } from '@gorhom/bottom-sheet';
@@ -7,10 +7,7 @@ import BottomSheetModal from '../BottomSheetModal';
 import styles from './styles';
 
 interface DateRangePickerProps {
-  startDate: string | undefined;
-  endDate: string | undefined;
-  onChangeStartDate: (date: string) => void;
-  onChangeEndDate: (date: string) => void;
+  onConfirmRange: (range: { startDate: string; endDate: string }) => void;
 }
 
 const getMarkedDates = (start?: string, end?: string) => {
@@ -49,29 +46,13 @@ const getMarkedDates = (start?: string, end?: string) => {
   return marked;
 };
 
-const DateRangePicker: FC<DateRangePickerProps> = ({
-  startDate,
-  endDate,
-  onChangeStartDate,
-  onChangeEndDate,
-}) => {
-  const bottomSheetRef = useRef<GorhomBottomSheetModal>((null));
+const DateRangePicker: FC<DateRangePickerProps> = ({ onConfirmRange }) => {
+  const bottomSheetRef = useRef<GorhomBottomSheetModal>(null);
   const [selectingStart, setSelectingStart] = useState(true);
+  const [startDate, setStartDate] = useState<string>();
+  const [endDate, setEndDate] = useState<string>();
 
-  const markedDates = useMemo(
-    () => getMarkedDates(startDate, endDate),
-    [startDate, endDate]
-  );
-
-  const onDayPress = (day: { dateString: string }) => {
-    if (selectingStart) {
-      onChangeStartDate(day.dateString);
-      setSelectingStart(false);
-    } else {
-      onChangeEndDate(day.dateString);
-      setSelectingStart(true);
-    }
-  };
+  const markedDates = useMemo(() => getMarkedDates(startDate, endDate), [startDate, endDate]);
 
   const handleOpen = () => {
     bottomSheetRef.current?.present();
@@ -81,15 +62,33 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
     bottomSheetRef.current?.dismiss();
   };
 
+  const onDayPress = (day: { dateString: string }) => {
+    if (selectingStart) {
+      setStartDate(day.dateString);
+      setEndDate(undefined);
+      setSelectingStart(false);
+    } else {
+      setEndDate(day.dateString);
+      setSelectingStart(true);
+    }
+  };
+
+  const handleConfirm = () => {
+    if (startDate && endDate) {
+      onConfirmRange({ startDate, endDate });
+      handleClose();
+    }
+  };
+
   return (
     <>
-      <Pressable style={styles.dateInputContainer} onPress={handleOpen}>
+      <TouchableOpacity style={styles.dateInputContainer} onPress={handleOpen}>
         <Text style={styles.dateInputText}>
           {startDate && endDate
             ? `From ${format(parseISO(startDate), 'MMM/dd')} to ${format(parseISO(endDate), 'MMM/dd')}`
             : 'Select a date'}
         </Text>
-      </Pressable>
+      </TouchableOpacity>
 
       <BottomSheetModal ref={bottomSheetRef} snapPoints={['50%']} backgroundColor="#1F49D1">
         <View style={styles.modalContent}>
@@ -109,9 +108,13 @@ const DateRangePicker: FC<DateRangePickerProps> = ({
               selectedDayBackgroundColor: '#FFFFFF33',
             }}
           />
-          <Pressable style={styles.selectButton} onPress={handleClose}>
+          <TouchableOpacity
+            style={[styles.selectButton, !(startDate && endDate) && { opacity: 0.5 }]}
+            disabled={!(startDate && endDate)}
+            onPress={handleConfirm}
+          >
             <Text style={styles.selectButtonText}>Select</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </BottomSheetModal>
     </>

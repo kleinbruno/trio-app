@@ -41,19 +41,22 @@ const Bikes: FC = () => {
     []
   );
 
+  const renderBikeCard = useCallback(
+    ({ item }: { item: Bike }) => (
+      <BikeCard onPress={() => handleBikeCardOnPress(item)} data={item} />
+    ),
+    [handleBikeCardOnPress]
+  );
+
   return (
     <SafeAreaView edges={['bottom']} style={styles.container}>
       <NavBarHeader title={route.name} />
       <View style={styles.listContainer}>
         {data && (
           <FlashList
-            renderItem={({ item }: { item: Bike }) => (
-              <BikeCard
-                onPress={() => handleBikeCardOnPress(item)}
-                data={item}
-              />
-            )}
-            estimatedItemSize={200}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={renderBikeCard}
+            estimatedItemSize={250}
             data={data}
             ItemSeparatorComponent={itemSeparatorComponent}
             refreshing={isLoading}

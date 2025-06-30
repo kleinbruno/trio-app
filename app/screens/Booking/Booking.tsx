@@ -22,7 +22,7 @@ const Booking = () => {
 
   return (
     <SafeAreaView edges={['bottom']} style={styles.container}>
-      <View style={{ flex: 1 }}>
+      <View style={styles.container}>
         <NavBarHeader
           title={route.name}
           hasBackButton
@@ -34,12 +34,10 @@ const Booking = () => {
           <Text style={styles.sectionTitle}>
             Select date and time
           </Text>
-          <DateRangePicker
-            startDate={startDate}
-            endDate={endDate}
-            onChangeStartDate={setStartDate}
-            onChangeEndDate={setEndDate}
-          />
+          <DateRangePicker onConfirmRange={({ startDate, endDate }) => {
+            setStartDate(startDate);
+            setEndDate(endDate);
+          }} />
           <BookingSummary subtotal={165.0} serviceFee={24.75} />
         </ScrollView>
         <View style={styles.footer}>
