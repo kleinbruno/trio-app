@@ -1,17 +1,14 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import { ENV } from '../../env';
 
 const headers = {
   'Content-Type': 'application/json',
-  Authorization: '2591afa4-7526-4541-b720-c0ed5a623e35',
+  Authorization: ENV.CANDIDATE_TOKEN,
 };
 
 const fetchBikes = async () => {
-  const { data } = await axios.get(
-    'https://trio-bike-rent-api.herokuapp.com/api/bikes/', // TODO: get URL from env var
-    { headers }
-  );
-
+  const { data } = await axios.get(`${ENV.API_BASE_URL}/bikes/`, { headers });
   return data;
 };
 
