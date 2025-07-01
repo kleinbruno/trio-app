@@ -3,7 +3,7 @@ module.exports = {
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
-  setupFiles: ['<rootDir>/test/setup.ts'],
+  setupFiles: ['<rootDir>/test/setup.tsx'],
   transformIgnorePatterns: [
     'node_modules/(?!(jest-)?react-native|@react-native|@react-navigation|@gorhom/bottom-sheet|react-native-gesture-handler)',
   ],

@@ -12,12 +12,16 @@ declare global {
 
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 
-jest.mock('@gorhom/bottom-sheet', () => ({
-  BottomSheetModal: () => null,
-  BottomSheetModalProvider: ({ children }: any) => children,
-  BottomSheetView: ({ children }: any) => children,
-  BottomSheetBackdrop: () => null,
-}));
+import React from 'react';
+
+jest.mock('@gorhom/bottom-sheet', () => {
+  return {
+    BottomSheetModal: ({ children }: any) => <>{children}</>,
+    BottomSheetModalProvider: ({ children }: any) => <>{children}</>,
+    BottomSheetView: ({ children }: any) => <>{children}</>,
+    BottomSheetBackdrop: () => null,
+  };
+});
 
 // https://github.com/facebook/react-native/issues/51993
 jest.mock('react-native/Libraries/Components/RefreshControl/RefreshControl', () => ({

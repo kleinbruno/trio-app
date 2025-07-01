@@ -82,8 +82,8 @@ const DateRangePicker: FC<DateRangePickerProps> = ({ onConfirmRange }) => {
 
   return (
     <>
-      <TouchableOpacity style={styles.dateInputContainer} onPress={handleOpen}>
-        <Text style={styles.dateInputText}>
+      <TouchableOpacity style={styles.dateInputContainer} onPress={handleOpen} testID="open-picker">
+        <Text style={styles.dateInputText} testID="date-input-text">
           {startDate && endDate
             ? `From ${format(parseISO(startDate), 'MMM/dd')} to ${format(parseISO(endDate), 'MMM/dd')}`
             : 'Select a date'}
@@ -107,11 +107,13 @@ const DateRangePicker: FC<DateRangePickerProps> = ({ onConfirmRange }) => {
               textSectionTitleColor: 'white',
               selectedDayBackgroundColor: '#FFFFFF33',
             }}
+            testID="calendar"
           />
           <TouchableOpacity
             style={[styles.selectButton, !(startDate && endDate) && { opacity: 0.5 }]}
             disabled={!(startDate && endDate)}
             onPress={handleConfirm}
+            testID="confirm-button"
           >
             <Text style={styles.selectButtonText}>Select</Text>
           </TouchableOpacity>

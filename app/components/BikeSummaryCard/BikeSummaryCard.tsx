@@ -10,17 +10,22 @@ interface BikeSummaryCardProps {
 }
 
 const BikeSummaryCard: FC<BikeSummaryCardProps> = ({ data }) => (
-  <View style={styles.cardContainer}>
+  <View style={styles.cardContainer} testID="bike-summary-card">
     <Image
       style={styles.bikeImage}
       source={{ uri: data.imageUrls[0] }}
       resizeMode="contain"
       defaultSource={BikePlaceholder}
+      testID="bike-summary-image"
     />
     <View style={styles.bikeTextContainer}>
-      <Text style={styles.bikeName}>{data.name}</Text>
+      <Text style={styles.bikeName} testID="bike-summary-name">
+        {data.name}
+      </Text>
       <BikeTypeBadge type={data.type} />
-      <Text style={styles.bikePrice}>{data.rate} €/Day</Text>
+      <Text style={styles.bikePrice} testID="bike-summary-rate">
+        {data.rate} €/Day
+      </Text>
     </View>
   </View>
 );

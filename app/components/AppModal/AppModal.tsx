@@ -15,7 +15,7 @@ const AppModal: React.FC<AppModalProps> = ({ visible, title, description, onClos
   return (
     <Modal transparent visible={visible} animationType="fade">
       <View style={styles.overlay}>
-        <View style={styles.modalContainer}>
+        <View style={styles.modalContainer} testID="app-modal-container">
           <Text style={styles.title}>{title}</Text>
           {description && <Text style={styles.description}>{description}</Text>}
           {children}
