@@ -1,6 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-native/extend-expect';
 import { render, screen } from '@testing-library/react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { BikeDetailsModal } from '@app/components';
 import { mockedBike } from '@app/mocks';
 
@@ -9,11 +10,13 @@ describe('BikeDetailsModal component', () => {
 
   beforeEach(() => {
     render(
-      <BikeDetailsModal
-        testID="bike-details-modal"
-        handleCloseModal={onPress}
-        data={mockedBike}
-      />
+      <NavigationContainer>
+        <BikeDetailsModal
+          testID="bike-details-modal"
+          handleCloseModal={onPress}
+          data={mockedBike}
+        />
+      </NavigationContainer>
     );
   });
 
