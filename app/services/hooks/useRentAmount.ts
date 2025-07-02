@@ -10,7 +10,6 @@ interface RentAmountInput {
 }
 
 const fetchRentAmount = async (params: RentAmountInput): Promise<RentDetails> => {
-  console.log('params', params)
   const { data } = await api.post<RentDetails>('/bikes/amount', params);
   return data;
 };

@@ -11,14 +11,24 @@ interface DateRangePickerProps {
 }
 
 const getMarkedDates = (start?: string, end?: string) => {
+  const marked: Record<string, any> = {};
+
+  if (start && !end) {
+    marked[start] = {
+      startingDay: true,
+      endingDay: true,
+      color: 'white',
+      textColor: '#1F49D1',
+    };
+    return marked;
+  }
+
   if (!start || !end) return {};
 
   const range = eachDayOfInterval({
     start: parseISO(start),
     end: parseISO(end),
   });
-
-  const marked: Record<string, any> = {};
 
   range.forEach((date, index) => {
     const formatted = format(date, 'yyyy-MM-dd');
@@ -90,7 +100,7 @@ const DateRangePicker: FC<DateRangePickerProps> = ({ onConfirmRange }) => {
         </Text>
       </TouchableOpacity>
 
-      <BottomSheetModal ref={bottomSheetRef} snapPoints={['50%']} backgroundColor="#1F49D1">
+      <BottomSheetModal ref={bottomSheetRef} snapPoints={['60%']} backgroundColor="#1F49D1">
         <View style={styles.modalContent}>
           <Calendar
             minDate={new Date().toISOString().split('T')[0]}

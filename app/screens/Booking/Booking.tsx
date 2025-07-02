@@ -3,7 +3,6 @@ import { View, TouchableOpacity, ScrollView, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useQueryClient } from 'react-query';
 
 import { RootStackParamList } from '@app/navigation';
 import { NavBarHeader, BikeSummaryCard } from '@app/components';
@@ -29,7 +28,6 @@ const Booking = () => {
   const [endDate, setEndDate] = useState<string>();
   const [successModalVisible, setSuccessModalVisible] = useState(false);
 
-  const queryClient = useQueryClient();
   const rentBikeMutation = useRentBike();
   const returnBikeMutation = useReturnBike();
 
@@ -41,24 +39,25 @@ const Booking = () => {
       dateTo: endDate ?? '',
     }, {
       enabled: !!startDate && !!endDate,
-    });
-
-//Since we don’t have a flow for returning a bike, if I get the error UnavailableBikeError when trying to reserve a bike, that bike is returned
-useEffect(() => {
-  if (error && typeof error === 'object' && 'response' in error) {
-    const err = error as any;
-    const parsed = err.response?.data;
-
-    if (parsed?.errorType === 'UnavailableBikeError') {
-      returnBikeMutation.mutate(
-        {
-          bikeId: bike.id,
-          userId: Number(ENV.USER_ID),
-        },
-      );
     }
-  }
-}, [error]);
+  );
+
+  //Since we don’t have a flow for returning a bike, if I get the error UnavailableBikeError when trying to reserve a bike, that bike is returned
+  useEffect(() => {
+    if (error && typeof error === 'object' && 'response' in error) {
+      const err = error as any;
+      const parsed = err.response?.data;
+
+      if (parsed?.errorType === 'UnavailableBikeError') {
+        returnBikeMutation.mutate(
+          {
+            bikeId: bike.id,
+            userId: Number(ENV.USER_ID),
+          },
+        );
+      }
+    }
+  }, [error]);
 
   const handleBooking = () => {
     if (!startDate || !endDate) return;
@@ -104,7 +103,10 @@ useEffect(() => {
         </ScrollView>
         <View style={styles.footer}>
           <TouchableOpacity
-            style={styles.button}
+            style={[
+              styles.button,
+              !rentDetails && { opacity: 0.5 },
+            ]}
             onPress={handleBooking}
             disabled={!rentDetails}
           >

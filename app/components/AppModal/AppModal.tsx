@@ -1,6 +1,6 @@
 // src/components/AppModal/AppModal.tsx
 import React from 'react';
-import { Modal, View, Text, TouchableOpacity } from 'react-native';
+import { Modal, View, Text } from 'react-native';
 import styles from './styles';
 
 interface AppModalProps {
@@ -11,7 +11,7 @@ interface AppModalProps {
   children?: React.ReactNode;
 }
 
-const AppModal: React.FC<AppModalProps> = ({ visible, title, description, onClose, children }) => {
+const AppModal: React.FC<AppModalProps> = ({ visible, title, description, children }) => {
   return (
     <Modal transparent visible={visible} animationType="fade">
       <View style={styles.overlay}>

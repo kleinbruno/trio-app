@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#1F49D1',
     paddingBottom: 40,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
   selectButton: {
     backgroundColor: '#FFD775',

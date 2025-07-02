@@ -18,6 +18,8 @@ ios/.xcode.env.local
 # React Native
 android/.gradle/
 android/app/build/
+android/app/.cxx/
+android/build/
 ios/Pods/
 ios/Podfile.lock
 ios/build/
