@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 14,
     backgroundColor: '#FFD775',
+    alignSelf: 'flex-start',
   },
   bikeTypeText: {
     fontSize: 12,

@@ -13,10 +13,13 @@ yarn-error.log*
 
 # Xcode local env
 ios/.xcode.env.local
+*.xcuserstate
 
 # React Native
 android/.gradle/
 android/app/build/
+android/app/.cxx/
+android/build/
 ios/Pods/
 ios/Podfile.lock
 ios/build/

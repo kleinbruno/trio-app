@@ -9,9 +9,10 @@ import styles from './styles';
 interface BikeCardProps {
   data: Bike;
   onPress: () => void;
+  showPrice?: boolean;
 }
 
-const BikeCard: FC<BikeCardProps> = ({ data, onPress }) => (
+const BikeCard: FC<BikeCardProps> = ({ data, onPress, showPrice = true }) => (
   <TouchableOpacity
     testID="bike-card-button"
     activeOpacity={1}
@@ -40,12 +41,14 @@ const BikeCard: FC<BikeCardProps> = ({ data, onPress }) => (
     <View style={styles.separator} />
     <View style={styles.bikeInfoContainer}>
       <BikeTypeBadge testID="bike-card-type" type={data.type} />
-      <View style={styles.bikePriceContainer}>
-        <Text testID="bike-card-rate" style={styles.bikePriceText}>
-          {data.rate} €/{' '}
-        </Text>
-        <Text style={styles.bikeDayText}>Day</Text>
-      </View>
+      {showPrice && (
+        <View style={styles.bikePriceContainer}>
+          <Text testID="bike-card-rate" style={styles.bikePriceText}>
+            {data.rate} €/{' '}
+          </Text>
+          <Text style={styles.bikeDayText}>Day</Text>
+        </View>
+      )}
     </View>
   </TouchableOpacity>
 );
