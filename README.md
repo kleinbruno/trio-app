@@ -1,3 +1,6 @@
+# Explaining what I developed and the technical decisions
+[![Video Thumbnail](https://img.youtube.com/vi/aH6QdTBUkJM/maxresdefault.jpg)](https://youtu.be/aH6QdTBUkJM?si=2ckcMnAbwr5LCjcg)
+
 # Trio - Bike Rental Boilerplate - React Native
 ![React Native](https://img.shields.io/badge/react--native-0.70.3-green?style=flat-square) ![TypeScript](https://img.shields.io/badge/-TypeScript-blue?style=flat-square)
 
